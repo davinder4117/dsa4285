@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String - DSA Questions</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>String</h1>
+        <p>Questions, answers, and explanations</p>
+    </header>
+    <main>
+        <a class="back" href="../index.html">← Back to all topics</a>
+
+
+<section class="question">
+    <h2>Question 1</h2>
+    <p>Enter the string from user and convert it into uppercase.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        s[i] = toupper((unsigned char)s[i]);
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 2</h2>
+    <p>Enter the string from user and convert it into lowercase.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        s[i] = tolower((unsigned char)s[i]);
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 3</h2>
+    <p>Enter the string from user and convert it into sentence case.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    int first = 1;
+
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (first &amp;&amp; isalpha((unsigned char)s[i])) {
+            s[i] = toupper((unsigned char)s[i]);
+            first = 0;
+        } else {
+            s[i] = tolower((unsigned char)s[i]);
+        }
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 4</h2>
+    <p>Enter the string from user and convert it into title case.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    int newWord = 1;
+
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (isspace((unsigned char)s[i])) {
+            newWord = 1;
+        } else if (newWord) {
+            s[i] = toupper((unsigned char)s[i]);
+            newWord = 0;
+        } else {
+            s[i] = tolower((unsigned char)s[i]);
+        }
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 5</h2>
+    <p>Enter the string from user and convert it into toggle case.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (islower((unsigned char)s[i])) {
+            s[i] = toupper((unsigned char)s[i]);
+        } else if (isupper((unsigned char)s[i])) {
+            s[i] = tolower((unsigned char)s[i]);
+        }
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 6</h2>
+    <p>Enter the string from user and find its length.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200];
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    printf("Length = %d", (int)strlen(s));
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 7</h2>
+    <p>Enter two strings and compare whether they are equal or not.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char a[200], b[200];
+
+    fgets(a, sizeof(a), stdin);
+    fgets(b, sizeof(b), stdin);
+
+    a[strcspn(a, "\n")] = '\0';
+    b[strcspn(b, "\n")] = '\0';
+
+    if (strcmp(a, b) == 0) {
+        printf("Strings are equal");
+    } else {
+        printf("Strings are not equal");
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 8</h2>
+    <p>Enter two strings, concatenate them into another string and display the result.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char a[200], b[100], c[300];
+
+    fgets(a, sizeof(a), stdin);
+    fgets(b, sizeof(b), stdin);
+
+    a[strcspn(a, "\n")] = '\0';
+    b[strcspn(b, "\n")] = '\0';
+
+    strcpy(c, a);
+    strcat(c, b);
+
+    printf("%s", c);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 9</h2>
+    <p>Enter the string from user and copy it into another string variable.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char a[200], b[200];
+
+    fgets(a, sizeof(a), stdin);
+    a[strcspn(a, "\n")] = '\0';
+
+    strcpy(b, a);
+
+    printf("%s", b);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 10</h2>
+    <p>Enter the string and an index number, then print the character present at that index.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200];
+    int index;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    scanf("%d", &amp;index);
+
+    if (index &gt;= 0 &amp;&amp; index &lt; (int)strlen(s)) {
+        printf("%c", s[index]);
+    } else {
+        printf("Invalid index");
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 11</h2>
+    <p>Enter the string from user and check whether it is a palindrome or not.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200];
+    int palindrome = 1;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    int n = strlen(s);
+
+    for (int i = 0; i &lt; n / 2; i++) {
+        if (s[i] != s[n - 1 - i]) {
+            palindrome = 0;
+            break;
+        }
+    }
+
+    if (palindrome) {
+        printf("Palindrome");
+    } else {
+        printf("Not a palindrome");
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 12</h2>
+    <p>Enter the string and print each character on a new line.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    char s[200];
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] != '\n') {
+            printf("%c\n", s[i]);
+        }
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 13</h2>
+    <p>Enter the string and copy its reverse into another string.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char a[200], b[200];
+    int n;
+
+    fgets(a, sizeof(a), stdin);
+    a[strcspn(a, "\n")] = '\0';
+
+    n = strlen(a);
+
+    for (int i = 0; i &lt; n; i++) {
+        b[i] = a[n - 1 - i];
+    }
+
+    b[n] = '\0';
+
+    printf("%s", b);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 14</h2>
+    <p>Enter the string and print the difference between ASCII values of consecutive characters.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200];
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    for (int i = 0; s[i + 1] != '\0'; i++) {
+        printf("%d\n", (int)s[i + 1] - (int)s[i]);
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 15</h2>
+    <p>Enter the string and a character, then search for that character in the string.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200], ch;
+    int found = 0;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    scanf(" %c", &amp;ch);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] == ch) {
+            found = 1;
+            break;
+        }
+    }
+
+    if (found) {
+        printf("Character found");
+    } else {
+        printf("Character not found");
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 16</h2>
+    <p>Enter the string and a character. Print its index if it exists; otherwise print -1.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200], ch;
+    int index = -1;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    scanf(" %c", &amp;ch);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] == ch) {
+            index = i;
+            break;
+        }
+    }
+
+    printf("%d", index);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 17</h2>
+    <p>Enter the string and count the number of vowels.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    int count = 0;
+
+    fgets(s, sizeof(s), stdin);
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        char ch = tolower((unsigned char)s[i]);
+
+        if (ch == 'a' || ch == 'e' || ch == 'i' ||
+            ch == 'o' || ch == 'u') {
+            count++;
+        }
+    }
+
+    printf("Vowels = %d", count);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 18</h2>
+    <p>Enter the string and convert it into an integer value.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main() {
+    char s[100];
+    int number;
+
+    fgets(s, sizeof(s), stdin);
+    number = atoi(s);
+
+    printf("%d", number);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 19</h2>
+    <p>Enter the string and convert it into a float value.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main() {
+    char s[100];
+    float number;
+
+    fgets(s, sizeof(s), stdin);
+    number = strtof(s, NULL);
+
+    printf("%f", number);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 20</h2>
+    <p>Enter the string and count the number of characters, words, spaces and lines.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[1000];
+    int characters = 0, words = 0;
+    int spaces = 0, lines = 0, inWord = 0;
+
+    if (fgets(s, sizeof(s), stdin) != NULL) {
+        lines = 1;
+
+        for (int i = 0; s[i] != '\0'; i++) {
+            if (s[i] == '\n') {
+                lines++;
+                continue;
+            }
+
+            characters++;
+
+            if (s[i] == ' ') {
+                spaces++;
+            }
+
+            if (isspace((unsigned char)s[i])) {
+                inWord = 0;
+            } else if (!inWord) {
+                words++;
+                inWord = 1;
+            }
+        }
+
+        if (strchr(s, '\n') != NULL) {
+            lines--;
+        }
+    }
+
+    printf("Characters = %d\n", characters);
+    printf("Words = %d\n", words);
+    printf("Spaces = %d\n", spaces);
+    printf("Lines = %d\n", lines);
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 21</h2>
+    <p>Print all permutations of the string ABCDE.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void swap(char *a, char *b) {
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void permute(char s[], int start, int end) {
+    if (start == end) {
+        printf("%s\n", s);
+        return;
+    }
+
+    for (int i = start; i &lt;= end; i++) {
+        swap(&amp;s[start], &amp;s[i]);
+        permute(s, start + 1, end);
+        swap(&amp;s[start], &amp;s[i]);
+    }
+}
+
+int main() {
+    char s[] = "ABCDE";
+    permute(s, 0, strlen(s) - 1);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 22</h2>
+    <p>Enter the string, sort it in ascending order and print it.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200], temp;
+    int n;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+    n = strlen(s);
+
+    for (int i = 0; i &lt; n - 1; i++) {
+        for (int j = 0; j &lt; n - 1 - i; j++) {
+            if ((unsigned char)s[j] &gt;
+                (unsigned char)s[j + 1]) {
+                temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 23</h2>
+    <p>Enter a sentence and a word, then count the occurrences of that word in the sentence.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char sentence[1000], word[100];
+    int count = 0;
+
+    fgets(sentence, sizeof(sentence), stdin);
+    fgets(word, sizeof(word), stdin);
+
+    sentence[strcspn(sentence, "\n")] = '\0';
+    word[strcspn(word, "\n")] = '\0';
+
+    if (word[0] == '\0') {
+        printf("Word cannot be empty");
+        return 0;
+    }
+
+    char *p = sentence;
+    int len = strlen(word);
+
+    while (*p != '\0') {
+        while (*p != '\0' &amp;&amp;
+               isspace((unsigned char)*p)) {
+            p++;
+        }
+
+        if (*p == '\0') {
+            break;
+        }
+
+        char *start = p;
+
+        while (*p != '\0' &amp;&amp;
+               !isspace((unsigned char)*p)) {
+            p++;
+        }
+
+        if (p - start == len &amp;&amp;
+            strncmp(start, word, len) == 0) {
+            count++;
+        }
+    }
+
+    printf("Occurrences = %d", count);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 24</h2>
+    <p>Enter a sentence, a word to find and another word to replace it with.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char sentence[1000], word[100], replacement[100];
+    char result[2000] = "";
+    int i = 0;
+
+    fgets(sentence, sizeof(sentence), stdin);
+    fgets(word, sizeof(word), stdin);
+    fgets(replacement, sizeof(replacement), stdin);
+
+    sentence[strcspn(sentence, "\n")] = '\0';
+    word[strcspn(word, "\n")] = '\0';
+    replacement[strcspn(replacement, "\n")] = '\0';
+
+    if (word[0] == '\0') {
+        printf("Word cannot be empty");
+        return 0;
+    }
+
+    while (sentence[i] != '\0') {
+        if (isspace((unsigned char)sentence[i])) {
+            int len = strlen(result);
+            result[len] = sentence[i];
+            result[len + 1] = '\0';
+            i++;
+            continue;
+        }
+
+        int start = i;
+
+        while (sentence[i] != '\0' &amp;&amp;
+               !isspace((unsigned char)sentence[i])) {
+            i++;
+        }
+
+        int len = i - start;
+
+        if (len == strlen(word) &amp;&amp;
+            strncmp(&amp;sentence[start], word, len) == 0) {
+            strcat(result, replacement);
+        } else {
+            int current = strlen(result);
+
+            strncat(result, &amp;sentence[start], len);
+            result[current + len] = '\0';
+        }
+    }
+
+    printf("%s", result);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 25</h2>
+    <p>Enter the string and trim spaces from both ends.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    int start = 0, end, j = 0;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    end = strlen(s) - 1;
+
+    while (s[start] != '\0' &amp;&amp;
+           isspace((unsigned char)s[start])) {
+        start++;
+    }
+
+    while (end &gt;= start &amp;&amp;
+           isspace((unsigned char)s[end])) {
+        end--;
+    }
+
+    for (int i = start; i &lt;= end; i++) {
+        s[j++] = s[i];
+    }
+
+    s[j] = '\0';
+
+    printf("%s", s);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 26</h2>
+    <p>Enter the string, split the first and second words, and print the starting index of the second word.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[200];
+    int i = 0, start;
+
+    fgets(s, sizeof(s), stdin);
+
+    while (s[i] != '\0' &amp;&amp;
+           isspace((unsigned char)s[i])) {
+        i++;
+    }
+
+    while (s[i] != '\0' &amp;&amp;
+           !isspace((unsigned char)s[i])) {
+        i++;
+    }
+
+    while (s[i] != '\0' &amp;&amp;
+           isspace((unsigned char)s[i])) {
+        i++;
+    }
+
+    if (s[i] == '\0') {
+        printf("-1");
+        return 0;
+    }
+
+    start = i;
+
+    printf("Second word: ");
+
+    while (s[i] != '\0' &amp;&amp;
+           !isspace((unsigned char)s[i])) {
+        printf("%c", s[i]);
+        i++;
+    }
+
+    printf("\nStarting index = %d", start);
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 27</h2>
+    <p>Display the string with the user's chosen alignment: 1 for left, 2 for center and 3 for right.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[200];
+    int option, width = 40, len, spaces;
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    scanf("%d", &amp;option);
+    len = strlen(s);
+
+    if (len &gt; width) {
+        width = len;
+    }
+
+    if (option == 1) {
+        printf("%s", s);
+    } else if (option == 2) {
+        spaces = (width - len) / 2;
+
+        for (int i = 0; i &lt; spaces; i++) {
+            printf(" ");
+        }
+
+        printf("%s", s);
+    } else if (option == 3) {
+        spaces = width - len;
+
+        for (int i = 0; i &lt; spaces; i++) {
+            printf(" ");
+        }
+
+        printf("%s", s);
+    } else {
+        printf("Invalid option");
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 28</h2>
+    <p>Create a dictionary of 10 words and meanings with create, delete and search operations.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define SIZE 10
+
+struct Entry {
+    char word[50];
+    char meaning[100];
+    int active;
+};
+
+int main() {
+    struct Entry d[SIZE] = {0};
+    int choice, i, found;
+    char word[50];
+
+    while (1) {
+        printf("\n1. Create\n2. Delete\n3. Search\n4. Exit\n");
+        scanf("%d", &amp;choice);
+
+        if (choice == 1) {
+            found = -1;
+
+            for (i = 0; i &lt; SIZE; i++) {
+                if (!d[i].active) {
+                    found = i;
+                    break;
+                }
+            }
+
+            if (found == -1) {
+                printf("Dictionary is full\n");
+                continue;
+            }
+
+            printf("Enter word: ");
+            scanf("%49s", d[found].word);
+
+            printf("Enter meaning: ");
+            scanf(" %99[^\n]", d[found].meaning);
+
+            d[found].active = 1;
+
+        } else if (choice == 2) {
+            printf("Enter word to delete: ");
+            scanf("%49s", word);
+            found = 0;
+
+            for (i = 0; i &lt; SIZE; i++) {
+                if (d[i].active &amp;&amp;
+                    strcmp(d[i].word, word) == 0) {
+                    d[i].active = 0;
+                    found = 1;
+                    break;
+                }
+            }
+
+            if (found) {
+                printf("Deleted\n");
+            } else {
+                printf("Word not found\n");
+            }
+
+        } else if (choice == 3) {
+            printf("Enter word to search: ");
+            scanf("%49s", word);
+            found = 0;
+
+            for (i = 0; i &lt; SIZE; i++) {
+                if (d[i].active &amp;&amp;
+                    strcmp(d[i].word, word) == 0) {
+                    printf("%s: %s\n",
+                           d[i].word, d[i].meaning);
+                    found = 1;
+                    break;
+                }
+            }
+
+            if (!found) {
+                printf("Word not found\n");
+            }
+
+        } else if (choice == 4) {
+            break;
+        } else {
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+<section class="question">
+    <h2>Question 29</h2>
+    <p>Enter 10 characters and convert them into ASCII values in an integer array.</p>
+</section>
+<section class="answer">
+    <h2>Answer</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char s[100];
+    int ascii[10];
+
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    if (strlen(s) &lt; 10) {
+        printf("Enter at least 10 characters");
+        return 0;
+    }
+
+    for (int i = 0; i &lt; 10; i++) {
+        ascii[i] = (unsigned char)s[i];
+    }
+
+    for (int i = 0; i &lt; 10; i++) {
+        printf("%d ", ascii[i]);
+    }
+
+    return 0;
+}</code></pre>
+</section>
+
+</section>
+
+          
+        </section>
+    </main>
+    <footer><a href="../index.html">Home</a></footer>
+</body>
+</html>
